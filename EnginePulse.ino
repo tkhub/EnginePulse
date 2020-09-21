@@ -2,13 +2,11 @@
 #include <Arduino.h>
 #include <FlexiTimer2.h>
 
-// #define         bit_read(portdat, portconf)          ((portdat & portconf) ? 1 : 0)  
-// #define         bit_write(portdat, portconf, hilo)   (portdat = (hilo ? (portdat | portconf) : (portdat & ~portconf)))  
-
 /// plse Plate tooth num
 int roundDeg = 360;
 int cycleDeg = 720;
 
+/// crank pulse plate profile. true is active, false is negative.
 bool pulsePlateTbl[] = {
  /* 0     1     2     3     4     5     6     7     8     9     */
     true, true, true, true, true, true, true, true, true, true, 
@@ -20,9 +18,13 @@ bool pulsePlateTbl[] = {
     true, true, true, true, true, true, true, true, true, true, true
 };
 
+/// crank plate tooth number
 int pulsePerRound = sizeof(pulsePlateTbl)/sizeof(pulsePlateTbl[0]);
 
+/// pulse width of crank angle sensor
 int pulseWidthus = 74;
+
+/// index counter of pulsePlateTbl
 int crankCounter = 0;
 
 
