@@ -32,7 +32,7 @@ int crankCounter = 0;
 void setup() 
 {
     // put your setup code here, to run once:
-    pinMode(13, OUTPUT);
+    DDRB |= _BV(PB5) | _BV(PB4);
     setPulseIntv(1600);
 }
 
@@ -56,13 +56,14 @@ void pulseIntr(void)
     {
         noInterrupts();    
         digitalWrite(13, LOW);
+        PORTB &= ~(_BV(PB5) | _BV(PB4));
         delayMicroseconds(pulseWidthus);
-        digitalWrite(13, HIGH);
+        PORTB |= _BV(PB5) | _BV(PB4);
         interrupts();
     }
     else
     {
-        digitalWrite(13, LOW);
+        PORTB &= ~(_BV(PB5) | _BV(PB4));
     }
     crankCounter = (crankCounter + 1) % pulsePerRound;
     
